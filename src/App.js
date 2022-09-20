@@ -2,7 +2,16 @@ import React from 'react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { Home, About, Products, SingleProduct, Cart, Checkout, Private, Error } from './pages';
+import {
+	Home,
+	About,
+	Products,
+	SingleProduct,
+	Cart,
+	Checkout,
+	Private,
+	Error,
+} from './pages';
 import { Navbar, Sidebar, Footer } from './components';
 
 import './index.css';
@@ -13,17 +22,17 @@ const App = () => {
 			<Navbar />
 			<Sidebar />
 			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/about" element={<About />} />
-				<Route path="/cart" element={<Cart />} />
-				<Route path="/products" element={<Products />} />
-				<Route path="/products/:id" element={<SingleProduct />} />
-				<Route path="/checkout" element={<Checkout />} />
-				<Route path="*" element={<Error />} />
+				<Route path='/' element={<Home />} />
+				<Route path='/about' element={<About />} />
+				<Route path='/cart' element={<Cart />} />
+				<Route path='/products' element={<Products />} />
+				<Route path='/products/:id' element={<SingleProduct />} />
+				<Route path='/checkout' element={<Checkout />} />
+				<Route path='*' element={<Error />} />
 			</Routes>
 			<Footer />
 		</Router>
-	)
-}
+	);
+};
 
 export default App;
