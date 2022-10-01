@@ -9,7 +9,7 @@ const Product = (props) => {
 	const { id, name, image, price } = props.product;
 	return (
 		<Wrapper>
-			<Link to={`products/${id}`} className='link-wrapper'>
+			<Link to={`/products/${id}`} className='link-wrapper'>
 				<div className='container'>
 					<img src={image} alt={name} />
 					<div className='link'>
