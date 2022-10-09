@@ -23,6 +23,26 @@ const filter_reducer = (state, action) => {
 			return { ...state, gridView: false };
 		case UPDATE_SORT:
 			return { ...state, sort: action.payload };
+		case SORT_PRODUCTS:
+			let tempProducts = [...state.filteredProducts];
+			if (state.sort == 'price-lowest') {
+				tempProducts = tempProducts.sort((a, b) => a.price - b.price);
+				return { ...state, filteredProducts: tempProducts };
+			} else if (state.sort == 'price-highest') {
+				tempProducts = tempProducts.sort((a, b) => b.price - a.price);
+				return { ...state, filteredProducts: tempProducts };
+			} else if (state.sort == 'name-a') {
+				tempProducts = tempProducts.sort((a, b) => {
+					return a.name.localeCompare(b.name)
+				});
+				return { ...state, filteredProducts: tempProducts };
+			} else {
+				tempProducts = tempProducts.sort((a, b) => {
+					return b.name.localeCompare(a.name)
+				});
+				return { ...state, filteredProducts: tempProducts };
+			}
+
 		default:
 			return state;
 	}
