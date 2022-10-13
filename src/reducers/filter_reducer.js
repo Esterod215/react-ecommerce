@@ -12,10 +12,19 @@ import {
 const filter_reducer = (state, action) => {
 	switch (action.type) {
 		case LOAD_PRODUCTS:
+			const prices = action.payload.map((product) => product.price);
+			let maxPrice = Math.max(...prices);
+			let minPrice = Math.min(...prices);
 			return {
 				...state,
 				allProducts: [...action.payload],
 				filteredProducts: [...action.payload],
+				filters: {
+					...state.filters,
+					min_price: minPrice,
+					max_price: maxPrice,
+					price: maxPrice,
+				},
 			};
 		case SET_GRIDVIEW:
 			return { ...state, gridView: true };
@@ -33,15 +42,23 @@ const filter_reducer = (state, action) => {
 				return { ...state, filteredProducts: tempProducts };
 			} else if (state.sort == 'name-a') {
 				tempProducts = tempProducts.sort((a, b) => {
-					return a.name.localeCompare(b.name)
+					return a.name.localeCompare(b.name);
 				});
 				return { ...state, filteredProducts: tempProducts };
 			} else {
 				tempProducts = tempProducts.sort((a, b) => {
-					return b.name.localeCompare(a.name)
+					return b.name.localeCompare(a.name);
 				});
 				return { ...state, filteredProducts: tempProducts };
 			}
+		case UPDATE_FILTERS:
+			const [name, value] = action.payload;
+			return {
+				...state, filters: {...state.filters, [name]: value}
+			}
+		case FILTER_PRODUCTS:
+			console.log(state);
+			return state;
 
 		default:
 			return state;
