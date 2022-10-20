@@ -47,9 +47,28 @@ export const FilterProvider = ({ children }) => {
 	};
 
 	const updateFilters = (e) => {
+		let name = e.target.name;
+		let value = e.target.value;
+
+		if (name === 'category') {
+			value = e.target.textContent;
+		}
+
+		if (name === 'color') {
+			value = e.target.dataset.color;
+		}
+
+		if (name === 'price') {
+			value = Number(e.target.value);
+		}
+
+		if (name === 'shipping') {
+			value = e.target.checked;
+		}
+
 		dispatch({
 			type: UPDATE_FILTERS,
-			payload: [e.target.name, e.target.value],
+			payload: [name, value],
 		});
 	};
 
@@ -62,7 +81,7 @@ export const FilterProvider = ({ children }) => {
 	}, [products]);
 
 	useEffect(() => {
-		dispatch({type: FILTER_PRODUCTS})
+		dispatch({ type: FILTER_PRODUCTS });
 		dispatch({ type: SORT_PRODUCTS });
 	}, [products, state.sort, state.filters]);
 
