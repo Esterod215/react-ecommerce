@@ -58,16 +58,17 @@ const Filters = () => {
 							})}
 						</select>
 					</div>
-					<div class='form-control'>
+					<div className='form-control'>
 						<h5>Colors</h5>
 						<div className='colors'>
 							{colors.map((color) => {
 								return (
 									<button
+										key={color}
 										data-color={color}
 										name='color'
 										className={`
-											${color === 'all' ? 'all-btn' : 'color-btn'} 
+											${color === 'all' ? 'all-btn' : 'color-btn'}
 											${filters.color === color ? 'active' : ''}
 										`}
 										style={{ backgroundColor: color != 'all' ? color : '' }}
