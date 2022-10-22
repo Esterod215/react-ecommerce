@@ -28,7 +28,7 @@ const initialState = {
 const ProductsContext = createContext();
 
 //create Provider Component to wrap application to access state in Products Context
-export const ProductsProvider = (props) => {
+export const ProductsProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	const openSidebar = () => {
@@ -66,7 +66,7 @@ export const ProductsProvider = (props) => {
 	return (
 		<ProductsContext.Provider
 			value={{ ...state, openSidebar, closeSidebar, fetchProduct }}>
-			{props.children}
+			{children}
 		</ProductsContext.Provider>
 	);
 };
