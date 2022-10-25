@@ -8,6 +8,7 @@ import {
   COUNT_CART_TOTALS
 } from "../actions";
 import AddToCart from "../components/AddToCart";
+import { CartItem } from "../components";
 
 const cartReducer = (state, action) => {
   switch (action.type) {
@@ -40,6 +41,30 @@ const cartReducer = (state, action) => {
         };
         return { ...state, cart: [...state.cart, cartItem] };
       }
+    case REMOVE_CART_ITEM:
+      let newCart = state.cart.filter(item => {
+        return item.id !== action.payload;
+      });
+      return { ...state, cart: newCart };
+    case CLEAR_CART:
+      return { ...state, cart: [], totalAmount: 0, totalItems: 0 };
+
+    case TOGGLE_CART_ITEM_AMOUNT:
+      let tempCart = state.cart.map(cartItem => {
+        if (cartItem.id === action.payload.id) {
+          if (action.payload.value === "+") {
+            if (cartItem.amount + 1 <= cartItem.max) {
+              return { ...cartItem, amount: cartItem.amount + 1 };
+            }
+          } else {
+            if (cartItem.amount - 1 > 0) {
+              return { ...cartItem, amount: cartItem.amount - 1 };
+            }
+          }
+        }
+        return cartItem;
+      });
+      return { ...state, cart: tempCart };
     default:
       return state;
   }

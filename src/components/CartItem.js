@@ -10,8 +10,12 @@ import AmountButtons from "./AmountButtons";
 const CartItem = ({ item }) => {
   const { toggleAmount, removeItem } = useCartContext();
 
-  const increase = () => {};
-  const decrease = () => {};
+  const increase = () => {
+    toggleAmount(item.id, "+");
+  };
+  const decrease = () => {
+    toggleAmount(item.id, "-");
+  };
   return (
     <Wrapper>
       <div className="title">

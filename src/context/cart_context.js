@@ -36,9 +36,15 @@ export const CartProvider = ({ children }) => {
   const addToCart = (id, color, amount, product) => {
     dispatch({ type: ADD_TO_CART, payload: { id, product, color, amount } });
   };
-  const removeItem = id => {};
-  const toggleAmount = (id, value) => {};
-  const clearCart = () => {};
+  const removeItem = id => {
+    dispatch({ type: REMOVE_CART_ITEM, payload: id });
+  };
+  const toggleAmount = (id, value) => {
+    dispatch({ type: TOGGLE_CART_ITEM_AMOUNT, payload: { id, value } });
+  };
+  const clearCart = () => {
+    dispatch({ type: CLEAR_CART });
+  };
 
   return (
     <CartContext.Provider
