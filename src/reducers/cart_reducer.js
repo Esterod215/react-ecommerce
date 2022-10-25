@@ -65,6 +65,19 @@ const cartReducer = (state, action) => {
         return cartItem;
       });
       return { ...state, cart: tempCart };
+    case COUNT_CART_TOTALS:
+      let tempTotalItems = 0;
+      let tempTotalPrice = 0;
+
+      state.cart.map(cartItem => {
+        tempTotalItems += cartItem.amount;
+        tempTotalPrice += cartItem.price * cartItem.amount;
+      });
+      return {
+        ...state,
+        totalItems: tempTotalItems,
+        totalAmount: tempTotalPrice
+      };
     default:
       return state;
   }

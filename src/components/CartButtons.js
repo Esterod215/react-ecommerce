@@ -1,27 +1,29 @@
-import React from 'react'
-import { FaShoppingCart, FaUserMinus, FaUserPlus } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import React from "react";
+import { FaShoppingCart, FaUserMinus, FaUserPlus } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-import { useProductsContext } from '../context/products_context';
+import { useProductsContext } from "../context/products_context";
+import { useCartContext } from "../context/cart_context";
 
 const CartButtons = () => {
-	const { closeSidebar } = useProductsContext();
-	return (
-		<Wrapper className="cart-btn-wrapper">
-			<Link to="/cart" className="cart-btn" onClick={closeSidebar}>
-				Cart
-				<span className="cart-container">
-					<FaShoppingCart />
-					<span className="cart-value">12</span>
-				</span>
-			</Link>
-			<button className="auth-btn" type="button">
-				Login	<FaUserPlus />
-			</button>
-		</Wrapper>
-	)
-}
+  const { closeSidebar } = useProductsContext();
+  const { totalItems } = useCartContext();
+  return (
+    <Wrapper className="cart-btn-wrapper">
+      <Link to="/cart" className="cart-btn" onClick={closeSidebar}>
+        Cart
+        <span className="cart-container">
+          <FaShoppingCart />
+          <span className="cart-value">{totalItems}</span>
+        </span>
+      </Link>
+      <button className="auth-btn" type="button">
+        Login <FaUserPlus />
+      </button>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
   display: grid;
@@ -75,6 +77,6 @@ const Wrapper = styled.div`
       margin-left: 5px;
     }
   }
-`
+`;
 
 export default CartButtons;
