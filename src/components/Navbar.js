@@ -1,51 +1,55 @@
-import React from 'react';
+import React from "react";
 
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { FaBars } from 'react-icons/fa';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { FaBars } from "react-icons/fa";
 
-import logo from '../assets/logo.svg';
-import CartButtons from '../components/CartButtons';
-import { links } from '../utils/constants';
-import { useProductsContext } from '../context/products_context';
-
+import logo from "../assets/logo.svg";
+import CartButtons from "../components/CartButtons";
+import { links } from "../utils/constants";
+import { useProductsContext } from "../context/products_context";
+import { useUserContext } from "../context/user_context";
 
 const Navbar = () => {
-	const {openSidebar} = useProductsContext();
+  const { openSidebar } = useProductsContext();
+  const { isAuthenticated } = useUserContext();
 
-	return (
-		<NavContainer>
-			<div className="nav-center">
-				<div className="nav-header">
-					<Link to="/">
-						<img src={logo} alt="comfy sloth" />
-					</Link>
-					<button type="button" className="nav-toggle" onClick={openSidebar}>
-						<FaBars />
-					</button>
-				</div>
-				<ul className="nav-links">
-					{links.map((link) => {
-						return (
-							<li key={link.id}>
-								<Link to={link.url}>
-									{link.text}
-								</Link>
-							</li>
-						)
-					})}
-				</ul>
-				<CartButtons />
-			</div>
-		</NavContainer>
-	)
-}
+  return (
+    <NavContainer>
+      <div className="nav-center">
+        <div className="nav-header">
+          <Link to="/">
+            <img src={logo} alt="comfy sloth" />
+          </Link>
+          <button type="button" className="nav-toggle" onClick={openSidebar}>
+            <FaBars />
+          </button>
+        </div>
+        <ul className="nav-links">
+          {links.map(link => {
+            return (
+              <li key={link.id}>
+                <Link to={link.url}>{link.text}</Link>
+              </li>
+            );
+          })}
+          {isAuthenticated ? (
+            <li>
+              <Link to="/checkout">Checkout</Link>
+            </li>
+          ) : null}
+        </ul>
+        <CartButtons />
+      </div>
+    </NavContainer>
+  );
+};
 
 const NavContainer = styled.nav`
   height: 5rem;
   display: flex;
   align-items: center;
-	justify-content: center;
+  justify-content: center;
 
   .nav-center {
     width: 90vw;
@@ -89,14 +93,14 @@ const NavContainer = styled.nav`
       display: flex;
       justify-content: center;
       li {
-				margin: 0 0.5rem;
-				list-style: none;
+        margin: 0 0.5rem;
+        list-style: none;
       }
       a {
         color: var(--clr-grey-3);
         font-size: 1rem;
-				text-transform: capitalize;
-				text-decoration: none;
+        text-transform: capitalize;
+        text-decoration: none;
         letter-spacing: var(--spacing);
         padding: 0.5rem;
         &:hover {
@@ -108,6 +112,6 @@ const NavContainer = styled.nav`
       display: grid;
     }
   }
-`
+`;
 
 export default Navbar;
