@@ -4,8 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
-  const { loginWithRedirect, isAuthenticated, isLoading, logout, user } =
-    useAuth0();
+  const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
   const [myUser, setMyUser] = useState(null);
 
   useEffect(() => {
@@ -14,6 +13,7 @@ export const UserContextProvider = ({ children }) => {
     } else {
       setMyUser(false);
     }
+    // eslint-disable-next-line
   }, [isAuthenticated]);
   return (
     <UserContext.Provider

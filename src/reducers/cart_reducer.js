@@ -1,5 +1,3 @@
-import React from "react";
-
 import {
   ADD_TO_CART,
   REMOVE_CART_ITEM,
@@ -7,14 +5,12 @@ import {
   CLEAR_CART,
   COUNT_CART_TOTALS
 } from "../actions";
-import AddToCart from "../components/AddToCart";
-import { CartItem } from "../components";
 
 const cartReducer = (state, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       const { id, color, amount, product } = action.payload;
-      const itemCheck = state.cart.find(cartItem => cartItem.id == id + color);
+      const itemCheck = state.cart.find(cartItem => cartItem.id === id + color);
 
       if (itemCheck) {
         const tempCart = state.cart.map(cartItem => {
@@ -72,6 +68,7 @@ const cartReducer = (state, action) => {
       state.cart.map(cartItem => {
         tempTotalItems += cartItem.amount;
         tempTotalPrice += cartItem.price * cartItem.amount;
+        return cartItem;
       });
       return {
         ...state,

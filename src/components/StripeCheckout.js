@@ -61,6 +61,7 @@ const CheckoutForm = () => {
 
   useEffect(() => {
     createPaymentIntent();
+    // eslint-disable-next-line
   }, []);
 
   const handleChange = async event => {
@@ -126,7 +127,6 @@ const CheckoutForm = () => {
             <a href="https://dashboard.stripe.com/test/payments">
               Stripe dashboard
             </a>
-            Refresh the page
           </p>
         }
       </form>

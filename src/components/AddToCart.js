@@ -33,12 +33,12 @@ const AddToCart = ({ product }) => {
               <button
                 key={color}
                 className={
-                  mainColor == color ? "color-btn active" : "color-btn"
+                  mainColor === color ? "color-btn active" : "color-btn"
                 }
                 style={{ background: color }}
                 onClick={() => setMainColor(color)}
               >
-                {mainColor == color ? <FaCheck /> : null}
+                {mainColor === color ? <FaCheck /> : null}
               </button>
             );
           })}
